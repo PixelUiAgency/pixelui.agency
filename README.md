@@ -7,6 +7,8 @@ index.html
 css/style.css
 js/main.js
 fonts/   Geist, Geist Mono, Instrument Serif (woff2, SIL OFL)
+og-image.png                         social preview (1200×630)
+favicon.{ico,svg}, favicon-32x32.png, apple-touch-icon.png, icon-{192,512}.png, site.webmanifest
 ```
 
 ## Run locally
