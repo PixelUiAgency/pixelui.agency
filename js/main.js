@@ -245,12 +245,17 @@
 
     if (reduceMotion) return;
 
-    window.addEventListener("pointermove", (e) => {
+    const track = (e) => {
       const b = canvas.getBoundingClientRect();
       mouse.tx = e.clientX - b.left;
       mouse.ty = e.clientY - b.top;
       if (!mouse.active) { mouse.x = mouse.tx; mouse.y = mouse.ty; mouse.active = true; }
-    }, { passive: true });
+    };
+    window.addEventListener("pointermove", track, { passive: true });
+    // Touch: start the trail on tap, stop it when the finger lifts
+    window.addEventListener("pointerdown", (e) => { if (e.pointerType !== "mouse") track(e); }, { passive: true });
+    window.addEventListener("pointerup", (e) => { if (e.pointerType !== "mouse") mouse.active = false; }, { passive: true });
+    window.addEventListener("pointercancel", () => { mouse.active = false; }, { passive: true });
     document.documentElement.addEventListener("pointerleave", () => { mouse.active = false; });
 
     document.addEventListener("visibilitychange", () => {
